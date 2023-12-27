@@ -1,0 +1,40 @@
+/*
+다대다 관계
+1. 2개의 테이블을 직접 관계 짓는 것은 불가능하다.
+2.다대다 관계를 가지는 2개의 테이블과 연결될 중간 테이블이 필요하다.
+3.일대다 관계를 2개 만들면 다대다 관계가 된다.
+
+*/
+/*
+--학생 -수강신청 - 과목
+CREATE TABLE STUDENT (
+STU_NO NUMBER NOT NULL PRIMARY KEY,
+NAME VARCHAR2(100 BYTE) NOT NULL,
+GRADE NUMBER NOT NULL,
+GRADE_NO NUMBER NOT NULL,
+NUM NUMBER NOT NULL
+);
+-- 과목 테이블
+
+CREATE TABLE SUBJ (
+SUB_NO NUMBER NOT NULL PRIMARY KEY,
+SU_NAME VARCHAR2 (100 BYTE) NOT NULL
+);
+
+-- 수강신청 테이블 
+CREATE TABLE SUB (
+ENROLL_NO NUMBER NOT NULL PRIMARY KEY,
+STU_NO NUMBER  REFERENCES STUDENT(STU_NO) ON DELETE CASCADE ,
+-- 학생이 지워지면 수강신청도 지워진다.
+SUB_NO NUMBER  REFERENCES SUBJ(SUB_NO) ON DELETE SET NULL 
+-- 과목이 지워지면 수강신청에서 과목 번호만 지운다. 학번은 지우지 않음
+);
+
+--수강신청 테이블 삭제
+DROP TABLE SUB;
+--과목테이블 삭제
+DROP TABLE SUBJ;
+--학생 테이블 삭제
+DROP TABLE STUDENT;
+*/
+
